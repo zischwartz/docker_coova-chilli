@@ -13,7 +13,9 @@ RUN apt-get update && apt-get install -y \
   libssl-dev \
   iptables \
   haserl \
-  net-tools
+  net-tools \
+  libjson0 \
+  libjson0-dev
 
 # grep git version of coova-chilli
 RUN git clone --depth 2 https://github.com/coova/coova-chilli.git /src/coova-chilli
@@ -26,7 +28,7 @@ RUN debuild -us -uc -b
 # install package
 RUN dpkg -i ../coova-chilli_*.deb
 
-# clean 
+# clean
 RUN apt-get purge -y git build-essential libtool autoconf automake gengetopt devscripts debhelper && \
     apt-get autoremove -y && \
     apt-get clean && \
